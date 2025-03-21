@@ -72,3 +72,22 @@ yarn-error.log*
 
 # OS-specific
 *.swp
+
+# Prisma migration history
+/prisma/migrations/
+
+# Local development database files (if using SQLite at any point)
+/dev.db
+/dev.db-journal
+
+# Environment variables
+.env
+
+# Prisma generated client (optional — usually kept)
+# /node_modules/@prisma/client  ← Only ignore if you're not checking in node_modules
+
+# Prisma Studio temp files
+/prisma/.DS_Store
+
+# Build outputs (already covered by Next.js ignore)
+/.next/
