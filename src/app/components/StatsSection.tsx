@@ -4,7 +4,7 @@ import useSWR from 'swr';
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 function StatsSection() {
-  const { data, error, isLoading } = useSWR('/api/stats', fetcher);
+  const { data, error, isLoading } = useSWR('/api/homePage/stats', fetcher);
 
   if (error) return <div className="text-center text-red-500">Failed to load stats</div>;
   if (isLoading || !data) return <div className="text-center">Loading stats...</div>;

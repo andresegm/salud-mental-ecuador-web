@@ -4,7 +4,7 @@ import useSWR from 'swr';
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 function ServicesSection() {
-  const { data, error, isLoading } = useSWR('/api/services', fetcher);
+  const { data, error, isLoading } = useSWR('/api//homePage/services', fetcher);
 
   if (error) return <div className="text-center text-red-500">Error al cargar servicios</div>;
   if (isLoading || !data) return <div className="text-center">Cargando servicios...</div>;

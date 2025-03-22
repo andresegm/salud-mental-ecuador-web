@@ -4,7 +4,7 @@ import useSWR from 'swr';
 const fetcher = (url: string) => fetch(url).then(res => res.json());
 
 function AboutSection() {
-  const { data, error, isLoading } = useSWR('/api/about', fetcher);
+  const { data, error, isLoading } = useSWR('/api//homePage/about', fetcher);
 
   if (error) return <div className="text-center text-red-500">Failed to load about section</div>;
   if (isLoading || !data) return <div className="text-center">Loading...</div>;

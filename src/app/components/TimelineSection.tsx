@@ -5,7 +5,7 @@ import useSWR from 'swr';
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 function TimelineSection() {
-  const { data, error, isLoading } = useSWR('/api/timeline', fetcher);
+  const { data, error, isLoading } = useSWR('/api//homePage/timeline', fetcher);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   if (error) return <div className="text-center text-red-500">Error al cargar la línea de tiempo</div>;

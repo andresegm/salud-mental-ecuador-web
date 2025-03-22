@@ -9,7 +9,6 @@ import TimelineSection from "./components/TimelineSection";
 import { useRef } from "react";
 
 export default function Home() {
-  const scrollRef = useRef<HTMLDivElement>(null);
 
   return (
     <>
