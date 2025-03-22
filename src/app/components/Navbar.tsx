@@ -21,10 +21,21 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 bg-white shadow-md">
       <nav className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-        {/* Logo */}
+      {/* Logo + Admin Link (Left Side) */}
+      <div className="flex items-center space-x-4">
         <Link href="/" className="text-xl font-bold text-blue-700">
           SME
         </Link>
+
+        {user?.role === 'ADMIN' && (
+          <Link
+            href="/admin"
+            className="text-sm font-medium text-blue-700 hover:text-blue-900 transition-colors"
+          >
+            Panel de Administrador
+          </Link>
+        )}
+      </div>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center space-x-6">
@@ -106,7 +117,7 @@ export default function Navbar() {
                       logout();
                       setIsOpen(false);
                     }}
-                    className="block w-full text-left hover:text-blue-600"
+                    className="bg-red-100 hover:bg-red-200 text-red-700 text-sm px-4 py-2 rounded-md transition-colors"
                   >
                     Cerrar sesión
                   </button>
@@ -117,7 +128,7 @@ export default function Navbar() {
                 <Link
                   href="/login"
                   onClick={() => setIsOpen(false)}
-                  className="block hover:text-blue-600"
+                  className="bg-blue-700 text-white text-sm px-4 py-2 rounded-md hover:bg-blue-800 transition-colors"
                 >
                   Iniciar sesión
                 </Link>
