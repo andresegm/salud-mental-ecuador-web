@@ -18,3 +18,35 @@ model BlogPost {
   publishedAt DateTime
   status      String
 }
+
+model Stat {
+  id     String @id @default(uuid())
+  label  String
+  value  Int
+  unit   String?
+}
+
+model AboutSection {
+  id      String @id @default(uuid())
+  title   String
+  content String
+  order   Int
+  slug    String @unique
+}
+
+model Service {
+  id          String  @id @default(uuid())
+  title       String
+  description String
+  featured    Boolean @default(false)
+  icon        String?
+}
+
+model TimelineEvent {
+  id       String @id @default(uuid())
+  year     String
+  event    String
+  order    Int
+  image    String?
+  category String?
+}
