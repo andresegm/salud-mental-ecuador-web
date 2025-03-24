@@ -18,13 +18,24 @@ import {
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+const fetcher = async (url: string) => {
+  try {
+    const res = await fetch(url);
+    if (!res.ok) {
+      throw new Error(`Error: ${res.status}`);
+    }
+    return await res.json();
+  } catch (error) {
+    console.error('Fetch error:', error);
+    return [];
+  }
+};
 
 export default function AdminTimelinePage() {
   const { data = [], mutate, isLoading } = useSWR('/api/homePage/timeline', fetcher);
   const [editing, setEditing] = useState<string | null>(null);
-  const [editData, setEditData] = useState({ year: '', event: '', category: '' });
-  const [newEvent, setNewEvent] = useState({ year: '', event: '', category: '' });
+  const [editData, setEditData] = useState({ year: '', event: '', category: '', image: '' });
+  const [newEvent, setNewEvent] = useState({ year: '', event: '', category: '', image: '' });
 
   const sensors = useSensors(useSensor(PointerSensor));
 
@@ -34,6 +45,7 @@ export default function AdminTimelinePage() {
       year: item.year,
       event: item.event,
       category: item.category || '',
+      image: item.image || '',
     });
   };
 
@@ -62,7 +74,7 @@ export default function AdminTimelinePage() {
         order: data.length + 1,
       }),
     });
-    setNewEvent({ year: '', event: '', category: '' });
+    setNewEvent({ year: '', event: '', category: '', image: '' });
     mutate();
   };
 
@@ -90,6 +102,12 @@ export default function AdminTimelinePage() {
     );
 
     mutate();
+  };
+
+  const handleImageUpload = (file: File, callback: (base64: string) => void) => {
+    const reader = new FileReader();
+    reader.onloadend = () => callback(reader.result as string);
+    reader.readAsDataURL(file);
   };
 
   if (isLoading) return <p className="p-4">Cargando eventos...</p>;
@@ -128,7 +146,35 @@ export default function AdminTimelinePage() {
                         placeholder="Categoría"
                         className="w-full mb-2 p-2 border rounded text-sm text-gray-900"
                       />
-                      <div className="flex gap-3">
+                      <label className="inline-block bg-blue-600 text-white px-4 py-2 rounded cursor-pointer hover:bg-blue-700">
+                        Subir imagen
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (file) {
+                              handleImageUpload(file, (base64) =>
+                                setEditData((prev) => ({ ...prev, image: base64 }))
+                              );
+                            }
+                          }}
+                          className="hidden"
+                        />
+                      </label>
+                      {editData.image && (
+                        <div className="mt-2">
+                          <img src={editData.image} alt="Preview" className="rounded max-h-40 mb-2" />
+                          <button
+                            onClick={() => setEditData((prev) => ({ ...prev, image: '' }))}
+                            className="text-sm text-red-600 underline hover:text-red-800"
+                            type="button"
+                          >
+                            Eliminar imagen
+                          </button>
+                        </div>
+                      )}
+                      <div className="flex gap-3 mt-3">
                         <button onClick={() => saveEdit(item.id)} className="px-3 py-1 bg-blue-600 text-white rounded">
                           Guardar
                         </button>
@@ -184,6 +230,34 @@ export default function AdminTimelinePage() {
             placeholder="Categoría (opcional)"
             className="border border-gray-300 p-2 rounded text-gray-900 placeholder:text-gray-700"
           />
+          <label className="inline-block bg-blue-600 text-white px-4 py-2 rounded cursor-pointer hover:bg-blue-700">
+            Subir imagen
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) {
+                  handleImageUpload(file, (base64) =>
+                    setEditData((prev) => ({ ...prev, image: base64 }))
+                  );
+                }
+              }}
+              className="hidden"
+            />
+          </label>
+          {editData.image && (
+            <div className="mt-2">
+              <img src={editData.image} alt="Preview" className="rounded max-h-40 mb-2" />
+              <button
+                onClick={() => setEditData((prev) => ({ ...prev, image: '' }))}
+                className="text-sm text-red-600 underline hover:text-red-800"
+                type="button"
+              >
+                Eliminar imagen
+              </button>
+            </div>
+          )}
         </div>
         <button
           onClick={handleAdd}
