@@ -239,25 +239,25 @@ export default function AdminTimelinePage() {
                 const file = e.target.files?.[0];
                 if (file) {
                   handleImageUpload(file, (base64) =>
-                    setEditData((prev) => ({ ...prev, image: base64 }))
+                    setNewEvent((prev) => ({ ...prev, image: base64 }))
                   );
                 }
               }}
               className="hidden"
             />
           </label>
-          {editData.image && (
-            <div className="mt-2">
-              <img src={editData.image} alt="Preview" className="rounded max-h-40 mb-2" />
-              <button
-                onClick={() => setEditData((prev) => ({ ...prev, image: '' }))}
-                className="text-sm text-red-600 underline hover:text-red-800"
-                type="button"
-              >
-                Eliminar imagen
-              </button>
-            </div>
-          )}
+          {newEvent.image && (
+        <div className="mt-2">
+          <img src={newEvent.image} alt="Preview" className="rounded max-h-40 mb-2" />
+          <button
+            onClick={() => setNewEvent((prev) => ({ ...prev, image: '' }))}
+            className="text-sm text-red-600 underline hover:text-red-800"
+            type="button"
+          >
+            Eliminar imagen
+          </button>
+        </div>
+      )}
         </div>
         <button
           onClick={handleAdd}
