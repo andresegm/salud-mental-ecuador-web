@@ -1,11 +1,11 @@
 'use client';
 
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import StatsSection from "./components/StatsSection";
-import AboutSection from "./components/AboutSection";
-import ServicesSection from "./components/ServicesSection";
-import TimelineSection from "./components/TimelineSection";
+import Navbar from "./components/navbar/Navbar";
+import Footer from "./components/footer/Footer";
+import StatsSection from "./components/homepage/StatsSection";
+import AboutSection from "./components/homepage/AboutSection";
+import ServicesSection from "./components/homepage/ServicesSection";
+import TimelineSection from "./components/homepage/TimelineSection";
 import { useRef } from "react";
 
 export default function Home() {

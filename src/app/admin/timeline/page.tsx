@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import useSWR from 'swr';
-import Navbar from "../../components/Navbar";
+import Navbar from "../../components/navbar/Navbar";
 import {
   DndContext,
   closestCenter,
