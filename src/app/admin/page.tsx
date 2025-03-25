@@ -16,6 +16,7 @@ export default function AdminDashboard() {
         <AdminCard title="Gestionar Línea de Tiempo" href="/admin/timeline" />
         <AdminCard title="Editar Acerca / Misión / Visión" href="/admin/about" />
         <AdminCard title="Gestionar Servicios" href="/admin/services" />
+        <AdminCard title="Documentos de Gobernanza" href="/admin/governance" />
         {/* Add more cards for Blog, Team, Testimonials, etc. */}
       </div>
     </div>

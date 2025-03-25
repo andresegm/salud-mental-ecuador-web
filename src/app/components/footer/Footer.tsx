@@ -9,6 +9,11 @@ export default function Footer() {
       </p>
       <p className="text-xs">Acuerdo Ministerial: 00075-2022</p>
       <p className="text-xs mt-1">©2020 por SaludMentalEC</p>
+      <p className="mt-4">
+        <a href="/gobernanza" className="text-blue-700 hover:underline font-medium">
+          Gobernanza
+        </a>
+      </p>
 
       {/* Social Media Icons */}
       <div className="flex justify-center gap-4 mt-4 text-blue-700">

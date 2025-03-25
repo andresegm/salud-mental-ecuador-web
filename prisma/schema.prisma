@@ -64,3 +64,13 @@ model TimelineEvent {
   image    String?
   category String?
 }
+
+model GovernanceDocument {
+  id          String @id @default(uuid())
+  title       String
+  year        String
+  version     String
+  description String
+  url         String 
+  order       Int
+}
