@@ -6,20 +6,20 @@ import Navbar from "../components/navbar/Navbar";
 export default function AdminDashboard() {
   return (
     <>
-    <Navbar />
-    <div className="min-h-screen p-8 bg-gray-600">
-      <h1 className="text-3xl font-bold mb-6">Panel de Administrador</h1>
-      <p className="text-gray-200 mb-8">Bienvenido. Selecciona una sección para administrar el contenido.</p>
+      <Navbar />
+      <div className="min-h-screen p-8 bg-gray-600">
+        <h1 className="text-3xl font-bold mb-6">Panel de Administrador</h1>
+        <p className="text-gray-200 mb-8">Bienvenido. Selecciona una sección para administrar el contenido.</p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <AdminCard title="Editar Estadísticas" href="/admin/stats" />
-        <AdminCard title="Gestionar Línea de Tiempo" href="/admin/timeline" />
-        <AdminCard title="Editar Acerca / Misión / Visión" href="/admin/about" />
-        <AdminCard title="Gestionar Servicios" href="/admin/services" />
-        <AdminCard title="Documentos de Gobernanza" href="/admin/governance" />
-        {/* Add more cards for Blog, Team, Testimonials, etc. */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <AdminCard title="Editar Estadísticas" href="/admin/stats" />
+          <AdminCard title="Gestionar Línea de Tiempo" href="/admin/timeline" />
+          <AdminCard title="Editar Acerca / Misión / Visión" href="/admin/about" />
+          <AdminCard title="Gestionar Servicios" href="/admin/services" />
+          <AdminCard title="Documentos de Gobernanza" href="/admin/governance" />
+          <AdminCard title="Miembros del Equipo" href="/admin/teamMembers" />
+        </div>
       </div>
-    </div>
     </>
   );
 }

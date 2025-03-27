@@ -16,6 +16,7 @@
     "@types/bcrypt": "^5.0.2",
     "@types/jsonwebtoken": "^9.0.9",
     "bcrypt": "^5.1.1",
+    "framer-motion": "^12.6.2",
     "jose": "^6.0.10",
     "jsonwebtoken": "^9.0.2",
     "next": "15.2.3",

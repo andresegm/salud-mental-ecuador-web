@@ -74,3 +74,20 @@ model GovernanceDocument {
   url         String 
   order       Int
 }
+
+model TeamMember {
+  id        String   @id @default(uuid())
+  name      String
+  role      String
+  category  TeamCategory
+  image     String?
+  bio       String?
+  order     Int
+}
+
+enum TeamCategory {
+  FUNDADORES
+  EQUIPO_ORGANIZACIONAL
+  JUNTA_DIRECTIVA
+  VOLUNTARIOS
+}
