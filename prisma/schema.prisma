@@ -49,12 +49,19 @@ model AboutSection {
 }
 
 model Service {
-  id          String  @id @default(uuid())
-  title       String
-  description String
-  featured    Boolean @default(false)
-  icon        String?
+  id           String  @id @default(uuid())
+  title        String
+  description  String
+  featured     Boolean @default(false)
+  icon         String?
+  section      String?
+  order        Int?      
+  price        String?
+  buttonLabel  String?
+  buttonUrl    String?
 }
+
+
 
 model TimelineEvent {
   id       String @id @default(uuid())

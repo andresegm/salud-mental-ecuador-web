@@ -24,16 +24,13 @@ export default function Home() {
           </p>
         </section>
 
-        {/* Stats */}
+     
         <StatsSection />
 
-        {/* About / Mission / Vision as Cards */}
         <AboutSection />
 
-        {/* Featured Services (Static placeholders for now) */}
         <ServicesSection />
 
-        {/* Timeline – Fancy Horizontal Slider */}
         <TimelineSection />
 
       </main>

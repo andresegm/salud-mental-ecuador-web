@@ -11,13 +11,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       case 'GET': {
         const services = await prisma.service.findMany({
           where: { featured: true },
-          orderBy: { title: 'asc' },
+          orderBy: { order: 'asc' },
         });
         return res.status(200).json(services);
       }
 
       case 'POST': {
-        const { title, description } = req.body;
+        const { title, description, section, price, buttonLabel, buttonUrl, order } = req.body;
 
         if (!title || !description) {
           return res.status(400).json({ error: 'Title and description are required.' });
@@ -27,6 +27,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           data: {
             title,
             description,
+            section,
+            price,
+            buttonLabel,
+            buttonUrl,
+            order,
             featured: true,
           },
         });
@@ -36,7 +41,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       case 'PUT': {
         const { id } = req.query;
-        const { title, description } = req.body;
+        const { title, description, section, price, buttonLabel, buttonUrl, order } = req.body;
 
         if (!id || typeof id !== 'string') {
           return res.status(400).json({ error: 'Invalid ID' });
@@ -44,7 +49,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         const updatedService = await prisma.service.update({
           where: { id },
-          data: { title, description },
+          data: {
+            ...(title && { title }),
+            ...(description && { description }),
+            ...(section && { section }),
+            ...(price && { price }),
+            ...(buttonLabel && { buttonLabel }),
+            ...(buttonUrl && { buttonUrl }),
+            ...(typeof order === 'number' && { order }),
+          },
         });
 
         return res.status(200).json(updatedService);
