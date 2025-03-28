@@ -10,7 +10,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     switch (method) {
       case 'GET': {
         const services = await prisma.service.findMany({
-          where: { featured: true },
           orderBy: { order: 'asc' },
         });
         return res.status(200).json(services);
@@ -25,15 +24,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         const newService = await prisma.service.create({
           data: {
-            title,
-            description,
-            section,
-            price,
-            buttonLabel,
-            buttonUrl,
-            order,
-            featured: true,
-          },
+            ...(title && { title }),
+            ...(description && { description }),
+            ...(section && { section }),
+            ...(price && { price }),
+            ...(buttonLabel && { buttonLabel }),
+            ...(buttonUrl && { buttonUrl }),
+            ...(typeof order === 'number' && { order }),
+            ...(typeof req.body.featured === 'boolean' && { featured: req.body.featured }),
+          },          
         });
 
         return res.status(201).json(newService);
@@ -41,7 +40,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       case 'PUT': {
         const { id } = req.query;
-        const { title, description, section, price, buttonLabel, buttonUrl, order } = req.body;
+        const { title, description, section, price, buttonLabel, buttonUrl, order, featured } = req.body;
 
         if (!id || typeof id !== 'string') {
           return res.status(400).json({ error: 'Invalid ID' });
@@ -57,6 +56,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             ...(buttonLabel && { buttonLabel }),
             ...(buttonUrl && { buttonUrl }),
             ...(typeof order === 'number' && { order }),
+            ...(typeof featured === 'boolean' && { featured }),
           },
         });
 

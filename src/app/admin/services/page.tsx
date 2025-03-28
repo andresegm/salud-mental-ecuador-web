@@ -35,7 +35,8 @@ export default function AdminServicesPage() {
     section: '',
     price: '',
     buttonLabel: '',
-    buttonUrl: ''
+    buttonUrl: '',
+    featured: false
   });
   const [newService, setNewService] = useState<any>({
     title: '',
@@ -143,6 +144,14 @@ export default function AdminServicesPage() {
                         placeholder="Precio"
                         className="w-full p-2 border rounded border-gray-300 rounded text-gray-700"
                       />
+                      <div className="flex items-center gap-2">
+                        <label className="text-sm text-gray-700">Página Principal?</label>
+                        <input
+                          type="checkbox"
+                          checked={editData.featured}
+                          onChange={(e) => setEditData((p: any) => ({ ...p, featured: e.target.checked }))}
+                        />
+                      </div>
                       <input
                         value={editData.buttonLabel}
                         onChange={(e) => setEditData((p: any) => ({ ...p, buttonLabel: e.target.value }))}
@@ -175,6 +184,9 @@ export default function AdminServicesPage() {
                           {service.buttonLabel}
                         </a>
                       )}
+                        <p className="text-xs text-gray-500">
+                         {service.featured ? 'Aparece en la página principal ✅' : 'No aparece en la página principal'}
+                         </p>
                       <div className="flex gap-4 mt-2">
                         <button onClick={() => {
                           setEditing(service.id);
@@ -185,6 +197,7 @@ export default function AdminServicesPage() {
                             price: service.price || '',
                             buttonLabel: service.buttonLabel || '',
                             buttonUrl: service.buttonUrl || '',
+                            featured: service.featured,
                           });
                         }} className="text-sm text-blue-600 hover:underline">
                           Editar
