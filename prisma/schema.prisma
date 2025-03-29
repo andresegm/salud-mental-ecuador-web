@@ -14,6 +14,7 @@ model User {
   passwordHash String
   role         Role     @default(USER)
   createdAt    DateTime @default(now())
+  likedPosts   BlogPost[] @relation("Likes") // Relation field
 }
 
 enum Role {
@@ -31,6 +32,8 @@ model BlogPost {
   coverImage  String?
   publishedAt DateTime
   status      String
+  views       Int      @default(0) // New field
+  likedBy     User[]   @relation("Likes") // Many-to-many relation
 }
 
 model Stat {

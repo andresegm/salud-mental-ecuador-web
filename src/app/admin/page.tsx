@@ -18,6 +18,7 @@ export default function AdminDashboard() {
           <AdminCard title="Gestionar Servicios" href="/admin/services" />
           <AdminCard title="Documentos de Gobernanza" href="/admin/governance" />
           <AdminCard title="Miembros del Equipo" href="/admin/teamMembers" />
+          <AdminCard title="Gestionar Blogs" href="/admin/blogPosts" />
         </div>
       </div>
     </>
