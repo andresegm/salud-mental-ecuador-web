@@ -9,7 +9,7 @@ const navLinks = [
   { label: "Acerca de SME", href: "/" },
   { label: "Equipo", href: "/equipo" },
   { label: "Servicios", href: "/servicios" },
-  { label: "Testimonios", href: "/testimonios" },
+  { label: "Blogs", href: "/blogs" },
   { label: "Eventos", href: "/eventos" },
   { label: "Patrocinadores", href: "/patrocinadores" },
 ];

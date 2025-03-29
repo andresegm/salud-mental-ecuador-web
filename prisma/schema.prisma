@@ -53,14 +53,13 @@ model Service {
   title        String
   description  String
   featured     Boolean @default(false)
-  icon         String?
+  image        String?
   section      String?
   order        Int?      
   price        String?
   buttonLabel  String?
   buttonUrl    String?
 }
-
 
 
 model TimelineEvent {

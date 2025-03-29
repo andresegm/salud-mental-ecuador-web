@@ -16,7 +16,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
 
       case 'POST': {
-        const { title, description, section, price, buttonLabel, buttonUrl, order } = req.body;
+        const { title, description, section, price, buttonLabel, buttonUrl, order, image } = req.body;
 
         if (!title || !description) {
           return res.status(400).json({ error: 'Title and description are required.' });
@@ -32,6 +32,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             ...(buttonUrl && { buttonUrl }),
             ...(typeof order === 'number' && { order }),
             ...(typeof req.body.featured === 'boolean' && { featured: req.body.featured }),
+            ...(image && { image }),
           },          
         });
 
@@ -40,7 +41,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       case 'PUT': {
         const { id } = req.query;
-        const { title, description, section, price, buttonLabel, buttonUrl, order, featured } = req.body;
+        const { title, description, section, price, buttonLabel, buttonUrl, order, featured, image } = req.body;
 
         if (!id || typeof id !== 'string') {
           return res.status(400).json({ error: 'Invalid ID' });
@@ -57,6 +58,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             ...(buttonUrl && { buttonUrl }),
             ...(typeof order === 'number' && { order }),
             ...(typeof featured === 'boolean' && { featured }),
+            ...(image && { image }),
           },
         });
 
