@@ -16,16 +16,28 @@ export default function BlogPage() {
 
   const handleLike = async (postId: string) => {
     if (!user) return alert('Debes iniciar sesión para dar like.');
-
+  
     setLiking(postId);
-    await fetch(`/api/blogPosts/likes`, {
+  
+    const res = await fetch(`/api/blogPosts/likes`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ postId }),
     });
+  
+    const updatedPost = await res.json();
+  
+    // Replace only the updated post in the current cache
+    mutate((posts: any[]) => {
+      if (!Array.isArray(posts)) return posts;
+      return posts.map((post) =>
+        post.id === updatedPost.id ? updatedPost : post
+      );
+    }, false); // false = don't revalidate, just update cache directly
+  
     setLiking(null);
-    mutate();
   };
+  
 
   return (
     <>

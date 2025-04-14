@@ -11,7 +11,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   let userId: string;
   try {
     const decoded = verifyToken(token);
-    userId = (decoded as any).id;
+    userId = (decoded as any).userId;
     if (!userId) throw new Error('ID de usuario faltante');
   } catch (err) {
     console.error('Error verificando token:', err);
@@ -40,7 +40,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       },
       include: { likedBy: true },
     });
-
+    res.status(200).json(updated); 
     res.status(200).json({ likedBy: updated.likedBy });
   } catch (err) {
     console.error('Error actualizando likes:', err);

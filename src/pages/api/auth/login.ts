@@ -28,7 +28,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     role: user.role,
   }
 
-  // Here's the explicit type-casting solution:
   const signOptions = {
     expiresIn: expiration,
   } as SignOptions;

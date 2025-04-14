@@ -11,6 +11,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       case 'GET': {
         const posts = await prisma.blogPost.findMany({
           orderBy: { publishedAt: 'desc' },
+          include: { likedBy: true },
         });
         return res.status(200).json(posts);
       }
